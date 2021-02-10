@@ -1,12 +1,40 @@
-import React, { useState } from 'react'
-export default function Home() {
+import React, { useState, useEffect } from "react";
 
-  let [count, setCount] = useState(0)
+import GlobalStyle from "./temas";
+
+export default function Home() {
+  const [isShow, setIsShow] = useState(false);
+
+  const menuOn = () => {
+    setIsShow(!isShow);
+  };
+
+  const [tema, setTema] = useState(false);
+
+  const temaDark = () => {
+    setTema(!tema);
+  };
+
+  useEffect(() => {
+    return console.log("hello");
+  }, [isShow]);
 
   return (
-    <div >
-      <button onClick={() => setCount(count + 1)}>click here</button>
-      <h1>contador {count}</h1>
-    </div>
-  )
+    <>
+      <GlobalStyle />
+      <div className={`${tema ? "offDark" : "onDark"}`}>
+        <button onClick={temaDark}>mudar tema</button>
+        <button onClick={menuOn}>menu</button>
+        <div className={`${isShow ? "on-menu" : "off-menu"}`}>
+          <ul>
+            <li>
+              <a className="sla" href="/post">
+                home
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
+  );
 }
